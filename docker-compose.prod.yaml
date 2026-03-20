@@ -1,6 +1,6 @@
 services:
   bot:
-    image: ghcr.io/ulugbekgozikhonov/renthouse:main
+    image: ghcr.io/husan-eshonqulov/renthouse:main
     environment:
       BOT_TOKEN: ${BOT_TOKEN}
       POSTGRES_URL: postgresql+asyncpg://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
@@ -20,7 +20,7 @@ services:
     restart: always
 
   migration:
-    image: ghcr.io/ulugbekgozikhonov/renthouse:main
+    image: ghcr.io/husan-eshonqulov/renthouse:main
     environment:
       POSTGRES_URL: postgresql+asyncpg://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
     depends_on:
