@@ -4,4 +4,4 @@ from messages import MessageService
 
 
 async def start_handler(msg: Message, messages: MessageService):
-    await msg.answer(messages.start_message())
+    await msg.answer(f"{messages.start_message()}!")
