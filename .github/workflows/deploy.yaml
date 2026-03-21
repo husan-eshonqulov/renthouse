@@ -42,6 +42,7 @@ jobs:
         run: |
           ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
           cd ${{ secrets.VPS_APP_DIR }} && 
+          git pull origin main && 
           make prod-compose-pull && 
           make prod-compose-up
           "
