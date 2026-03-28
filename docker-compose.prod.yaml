@@ -2,6 +2,7 @@ services:
   bot:
     image: ghcr.io/husan-eshonqulov/renthouse:main
     environment:
+      PYTHON_ENV: production
       BOT_TOKEN: ${BOT_TOKEN}
       POSTGRES_URL: postgresql+asyncpg://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
       REDIS_URL: redis://default:${REDIS_PASSWORD}@redis:6379/0
