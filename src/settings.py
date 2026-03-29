@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    python_env: Literal["development", "production"] = "development"
+    python_env: Literal["development", "production"]
 
     bot_token: str
     postgres_url: PostgresDsn
