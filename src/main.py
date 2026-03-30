@@ -23,19 +23,23 @@ async def on_shutdown():
     await redis.aclose()
 
 
-async def main():
+async def polling():
     dp.startup.register(on_startup)
     dp.shutdown.register(on_shutdown)
-
-    if settings.python_env == "production":
-        app = web.Application()
-        webhook_requests_handler = SimpleRequestHandler(dispatcher=dp, bot=bot)
-        webhook_requests_handler.register(app, path="/webhook")
-        setup_application(app, dp, bot=bot)
-        web.run_app(app, host="localhost", port=8080)
-        return
-
     await dp.start_polling(bot)  # type: ignore
 
 
-asyncio.run(main())
+def webhook():
+    dp.startup.register(on_startup)
+    dp.shutdown.register(on_shutdown)
+    app = web.Application()
+    webhook_requests_handler = SimpleRequestHandler(dispatcher=dp, bot=bot)
+    webhook_requests_handler.register(app, path="/webhook")
+    setup_application(app, dp, bot=bot)
+    web.run_app(app, host="localhost", port=8080)
+
+
+if settings.python_env == "production":
+    webhook()
+elif settings.python_env == "development":
+    asyncio.run(polling())
