@@ -6,6 +6,7 @@ services:
     volumes:
       - ./nginx.conf:/config/nginx/proxy-confs/renthouse.subdomain.conf
     ports:
+      - 80:80
       - 443:443
     restart: unless-stopped
 
@@ -32,7 +33,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-      interval: 10s
+      interval: 5s
       timeout: 5s
       retries: 5
     volumes:
@@ -56,7 +57,7 @@ services:
     command: [ "redis-server", "--requirepass", "${REDIS_PASSWORD}" ]
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
-      interval: 10s
+      interval: 5s
       timeout: 5s
       retries: 5
     volumes:

@@ -36,7 +36,7 @@ def webhook():
     webhook_requests_handler = SimpleRequestHandler(dispatcher=dp, bot=bot)
     webhook_requests_handler.register(app, path="/webhook")
     setup_application(app, dp, bot=bot)
-    web.run_app(app, host="localhost", port=8080)
+    web.run_app(app, host="0.0.0.0", port=8080)
 
 
 if settings.python_env == "production":
