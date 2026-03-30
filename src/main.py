@@ -15,7 +15,7 @@ async def on_startup(bot: Bot):
     print(f"https://t.me/{me.username} is started...")
 
     if settings.python_env == "production":
-        await bot.set_webhook(f"{settings.base_webhook_url}{settings.webhook_path}")
+        await bot.set_webhook(f"https://{settings.domain_name}/webhook")
 
 
 async def on_shutdown():
@@ -30,9 +30,9 @@ async def main():
     if settings.python_env == "production":
         app = web.Application()
         webhook_requests_handler = SimpleRequestHandler(dispatcher=dp, bot=bot)
-        webhook_requests_handler.register(app, path=str(settings.webhook_path))
+        webhook_requests_handler.register(app, path="/webhook")
         setup_application(app, dp, bot=bot)
-        web.run_app(app, host=settings.web_server_host, port=settings.web_server_port)
+        web.run_app(app, host="localhost", port=8080)
         return
 
     await dp.start_polling(bot)  # type: ignore
