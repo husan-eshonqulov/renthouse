@@ -4,7 +4,7 @@ services:
     environment:
       URL: ${DOMAIN_NAME}
     volumes:
-      - ./swag:/config
+      - ./nginx.conf:/config/nginx/proxy-confs/renthouse.subdomain.conf
     ports:
       - 443:443
     restart: unless-stopped
@@ -70,14 +70,10 @@ services:
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
       PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
       PGADMIN_CONFIG_SERVER_MODE: "True"
-    ports:
-      - 5050:80
     restart: unless-stopped
 
   redisinsight:
     image: redis/redisinsight
-    ports:
-      - 5540:5540
     volumes:
       - redisinsight_data:/data
     restart: unless-stopped
